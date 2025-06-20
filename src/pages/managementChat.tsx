@@ -145,7 +145,7 @@ export default function AIChatPage() {
     try {
       // Chama o webhook com a mensagem do usuário
       const response = await fetch(
-        "https://webhookbase.aryaraj.shop/webhook/bd3636e2-3272-469d-ac5b-fb3e1e484a95-ChatGestaoIA",
+        "https://webhookbase.aryaraj.shop/webhook/bd3636e2-3272-469d-ac5b-fb3e1e484a95-ChatGestaoIA01",
         {
           method: "POST",
           headers: {
