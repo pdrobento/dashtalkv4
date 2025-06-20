@@ -1,0 +1,159 @@
+/* Kanban Column Styles */
+.kanban-column {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 240px);
+  min-height: 500px;
+  max-height: calc(100vh - 240px);
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.kanban-column-header {
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.kanban-cards-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  padding: 8px;
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+.kanban-cards-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.kanban-cards-container::-webkit-scrollbar-track {
+  background: var(--zatten-bg-secondary);
+  border-radius: 3px;
+}
+
+.kanban-cards-container::-webkit-scrollbar-thumb {
+  background: var(--zatten-border-secondary);
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+}
+
+.kanban-cards-container::-webkit-scrollbar-thumb:hover {
+  background: var(--zatten-text-muted);
+}
+
+/* Firefox scrollbar */
+.kanban-cards-container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--zatten-border-secondary) var(--zatten-bg-secondary);
+}
+
+/* Card Styles */
+.kanban-card {
+  margin-bottom: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  position: relative;
+}
+
+.kanban-card:last-child {
+  margin-bottom: 4px; /* Small margin at bottom for better spacing */
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .kanban-column {
+    height: calc(100vh - 200px);
+    max-height: calc(100vh - 200px);
+    min-height: 400px;
+  }
+  
+  .kanban-cards-container {
+    padding: 6px;
+  }
+  
+  .kanban-card {
+    margin-bottom: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .kanban-column {
+    height: calc(100vh - 180px);
+    max-height: calc(100vh - 180px);
+    min-height: 350px;
+  }
+}
+
+/* Ensure cards don't overflow horizontally */
+.kanban-card-content {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.kanban-card-title {
+  word-break: break-word;
+  hyphens: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.kanban-card-description {
+  word-break: break-word;
+  hyphens: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* Drag and drop styles */
+.kanban-card-dragging {
+  transform: rotate(2deg) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+  opacity: 0.9;
+}
+
+.kanban-column-drag-over {
+  background-color: var(--zatten-accent);
+  opacity: 0.1;
+  transition: all 0.2s ease;
+}
+
+/* Prevent text selection during drag */
+.kanban-card-dragging * {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Performance optimizations */
+.kanban-cards-container {
+  will-change: scroll-position;
+  transform: translateZ(0); /* Enable hardware acceleration */
+}
+
+.kanban-card {
+  will-change: transform;
+  backface-visibility: hidden; /* Prevent flickering during transforms */
+}
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}
+
+.kanban-cards-container {
+  scroll-behavior: smooth;
+}

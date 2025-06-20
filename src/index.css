@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Escrito pelos desenvolvedores tema dark como padrão */
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 252 100% 67%; /* Purple/Violet accent */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 270 70% 60%; /* Roxo para focus */
+
+    --radius: 0.5rem;
+
+    /* Design System - Zatten Colors */
+    --zatten-bg-primary: #181a1b;
+    --zatten-bg-secondary: #232325;
+    --zatten-bg-tertiary: #1a1c1e;
+    --zatten-bg-hover: #282a2d;
+    --zatten-border-primary: #222326;
+    --zatten-border-secondary: #232323;
+    --zatten-border-tertiary: #2a2a2a;
+    --zatten-text-primary: #ffffff;
+    --zatten-text-secondary: #e5e5e5;
+    --zatten-text-muted: #9ca3af;
+    --zatten-text-placeholder: #6b7280;
+    --zatten-accent: #7857ff;
+    --zatten-accent-hover: #1d0080;
+    --zatten-success: #10b981;
+    --zatten-warning: #f59e0b;
+    --zatten-error: #ef4444;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  #root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .full-screen {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+  }
+
+  /* Scrollbar customizations */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--zatten-bg-primary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #333;
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #444;
+  }
+}
+
+@layer components {
+  /* Design System Components */
+  .zatten-card {
+    @apply bg-[var(--zatten-bg-secondary)] border border-[var(--zatten-border-primary)] rounded-lg;
+  }
+
+  .zatten-input {
+    @apply bg-[var(--zatten-bg-primary)] border border-[var(--zatten-border-secondary)] text-[var(--zatten-text-primary)] placeholder:text-[var(--zatten-text-placeholder)] rounded-lg;
+  }
+
+  .zatten-button-primary {
+    @apply bg-[var(--zatten-accent)] hover:bg-[var(--zatten-accent-hover)] text-white rounded-lg;
+  }
+
+  .zatten-button-secondary {
+    @apply bg-[var(--zatten-bg-secondary)] hover:bg-[var(--zatten-bg-hover)] border border-[var(--zatten-border-secondary)] text-[var(--zatten-text-secondary)] rounded-lg;
+  }
+
+  .zatten-sidebar {
+    @apply bg-[var(--zatten-bg-secondary)] border-r border-[var(--zatten-border-primary)];
+  }
+
+  .zatten-chat-bubble-sent {
+    @apply bg-purple-600 text-white rounded-2xl rounded-br-sm;
+  }
+
+  .zatten-chat-bubble-received {
+    @apply bg-gray-600 text-white rounded-2xl rounded-bl-sm;
+  }
+
+  /* Kanban Responsive Classes */
+  .kanban-lane {
+    @apply flex-shrink-0;
+    min-width: 280px;
+    max-width: 320px;
+  }
+
+  @media (max-width: 320px) {
+    .kanban-lane {
+      min-width: 260px;
+      max-width: 260px;
+    }
+  }
+
+  .kanban-card {
+    @apply mb-3 rounded-lg border border-[var(--zatten-border-secondary)] bg-[var(--zatten-bg-secondary)] p-3 shadow-sm transition-all hover:shadow-md;
+  }
+
+  .kanban-card:hover {
+    @apply shadow-md border-[var(--zatten-border-primary)];
+  }
+
+  .kanban-card-dragging {
+    @apply scale-105 shadow-lg rotate-2 ring-2 ring-[var(--zatten-accent)] ring-opacity-50;
+  }
+
+  .kanban-drop-zone {
+    @apply min-h-[200px] p-3 transition-colors;
+  }
+
+  .kanban-drop-zone-active {
+    @apply bg-[var(--zatten-accent)]/10;
+  }
+
+  /* Text truncation utilities */
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+}
+
+/* Animações personalizadas */
+@keyframes spin-delay {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animation-delay-150 {
+  animation-delay: 0.15s;
+}
+
+.animate-spin-slow {
+  animation: spin 2s linear infinite;
+}
+
+.loading-pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
